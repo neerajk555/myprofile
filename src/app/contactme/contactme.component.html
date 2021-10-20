@@ -1,0 +1,44 @@
+<div class="container">
+<h2> Drop me a message </h2>
+<form #newUserForm="ngForm" (ngSubmit)="onSubmit(newUserForm)" class="setform">
+
+    <input type="text" placeholder="User name"
+           required maxlength="25"
+           [(ngModel)]="userName" name="userName"
+           #pickedName="ngModel"> <br><br>
+    <div *ngIf="!pickedName.valid && pickedName.touched">
+      User name is required!
+    </div>
+  
+    <input type="email" placeholder="Email"
+           required [(ngModel)]="email" 
+           name="email" #userEmail="ngModel"> <br><br>
+    <div *ngIf="!userEmail.valid && userEmail.touched">
+      Email is required!
+    </div>
+  
+    <input type="text" placeholder="Nick name"
+           [(ngModel)]="nickName" name="nickName"> <br><br>
+  
+    <input type="text" placeholder="Leave me a message" required
+           [(ngModel)]="message" name="message"
+           #userMessage="ngModel"> <br><br>
+    <div *ngIf="!userMessage.valid && userMessage.touched">
+      Message is required!
+    </div>
+  
+  
+    <button type="submit" [disabled]="!newUserForm.form.valid">
+      Register
+    </button>
+  
+    <button type="button" (click)="newUserForm.reset()">
+      Reset
+    </button>
+  
+  </form>
+</div>
+
+
+  <pre>{{ newUserForm.form.value | json }}</pre> <!-- Value of whole form -->
+<pre>User name: {{ pickedName.value }}</pre> <!-- Value of userName field -->
